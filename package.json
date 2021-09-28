@@ -8,7 +8,7 @@
     "start": "npm run seed && node server && npm run build",
     "start:dev": "nodemon server/index.js --ignore dist/ --ignore client/ & npm run build:dev",
     "build:dev": "npm run build -- --watch --mode=development",
-    "seed": "node ./dataFiles/seed" 
+    "seed": "node ./dataFiles/seed"
   },
   "dependencies": {
     "axios": "^0.21.1",

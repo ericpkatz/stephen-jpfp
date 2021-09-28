@@ -12,13 +12,21 @@ import { fetchStudents } from '../store/students';
 import { fetchCampuses } from '../store/campuses';
 
 export class App extends Component {
-  componentDidMount() {
-    this.props.load();
+  constructor(){
+    super();
+    this.state = {
+      loading: true
+    };
+  }
+  async componentDidMount() {
+    await this.props.load();
+    this.setState({ loading: false });
   }
   
   
   render(){    
-    if (!this.props.students.length || !this.props.campuses.length) return (
+    const { loading } = this.state;
+    if (loading) return (
       <div className="load-wrapper">
         <h1>...LOADING MY STACK UNIVERSITY DASHBOARD</h1>
         <div className="loader"></div>
@@ -68,8 +76,10 @@ const mapState = ({ students, campuses }) => ({
 
 const mapDispatch = (dispatch) => ({
   load: () => {
-    dispatch(fetchCampuses());
-    dispatch(fetchStudents());
+    return Promise.all([
+      dispatch(fetchCampuses()),
+      dispatch(fetchStudents())
+    ]);
   }
 });
 
