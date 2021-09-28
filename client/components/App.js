@@ -5,7 +5,7 @@ import Students from './Students';
 import Campuses from './Campuses';
 import StudentProfile from './StudentProfile';
 import CampusProfile from './CampusProfile';
-import Main from './Main';
+import Nav from './Nav';
 import StudentForm from './StudentForm';
 import { connect } from 'react-redux';
 import { fetchStudents } from '../store/students';
@@ -37,7 +37,7 @@ export class App extends Component {
         
         <Router>
           <div id="main-content">
-            <Main />
+            <Route component={ Nav } />
 
             <Switch>              
               <Route exact path='/students' component={Students} />
