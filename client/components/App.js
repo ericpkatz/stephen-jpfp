@@ -11,6 +11,26 @@ import { connect } from 'react-redux';
 import { fetchStudents } from '../store/students';
 import { fetchCampuses } from '../store/campuses';
 
+const Home = connect(state => state)(({ students, campuses})=> {
+  const enrolledCount = students.filter( student => student.campusId).length;
+  return (
+      <div id="welcome" className="container">          
+        <h1>
+          <i className="fas fa-tachometer-alt"></i>
+          <br />
+          Welcome to Music Stack University's Enrollment Dashboard
+        </h1>
+          <p>
+            {students.length} Students, ({ enrolledCount} Enrolled) across {campuses.length} Campuses.
+          </p>
+          <p className="sub-text">
+            Project by Stephen Wong at FullStack Academy.<br /> 
+            <a href="https://github.com/stephen-wong-tx/jpfp-template-a-flex" target="_blank">About</a>
+          </p>
+      </div>
+  );
+});
+
 export class App extends Component {
   constructor(){
     super();
@@ -40,6 +60,7 @@ export class App extends Component {
             <Route component={ Nav } />
 
             <Switch>              
+              <Route path='/' exact component={ Home } />
               <Route exact path='/students' component={Students} />
               <Route path='/students/:id' component={StudentProfile} />
               <Route path='/students&filter=:filterId' component={Students} />
@@ -49,20 +70,6 @@ export class App extends Component {
             </Switch>            
           </div>
 
-          <div id="welcome" className="container">          
-            <h1>
-              <i className="fas fa-tachometer-alt"></i>
-              <br />
-              Welcome to Music Stack University's Enrollment Dashboard
-            </h1>                    
-              <p>
-                {this.props.students.length} Students Enrolled across {this.props.campuses.length} Campuses.
-              </p>
-              <p className="sub-text">
-                Project by Stephen Wong at FullStack Academy.<br /> 
-                <a href="https://github.com/stephen-wong-tx/jpfp-template-a-flex" target="_blank">About</a>
-              </p>                           
-          </div>
         </Router>
       </div>
     )
