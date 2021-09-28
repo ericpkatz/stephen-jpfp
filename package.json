@@ -1,0 +1,39 @@
+{
+  "name": "final-project",
+  "version": "0.0.1",
+  "description": "A review time project",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack",
+    "start": "npm run seed && node server && npm run build",
+    "start:dev": "nodemon server/index.js --ignore dist/ --ignore client/ & npm run build:dev",
+    "build:dev": "npm run build -- --watch --mode=development",
+    "seed": "node ./dataFiles/seed" 
+  },
+  "dependencies": {
+    "axios": "^0.21.1",
+    "express": "^4.17.1",
+    "install": "^0.13.0",
+    "npm": "^7.24.0",
+    "pg": "^8.7.1",
+    "react-router-dom": "^5.3.0",
+    "morgan": "^1.10.0",
+    "sequelize": "^6.6.4",
+    "@babel/core": "^7.14.6",
+    "@babel/preset-react": "^7.14.5",
+    "babel-loader": "^8.2.2",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2",
+    "react-redux": "^7.2.5",
+    "redux": "^4.1.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.3.0",
+    "volleyball": "^1.5.1",
+    "webpack": "^5.41.1",
+    "webpack-cli": "^4.7.2",
+    "webpack-dev-server": "^4.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.9"
+  }
+}

@@ -1,0 +1,22 @@
+# Ignore all node_modules
+node_modules/*
+
+dist/
+
+notes.txt
+
+public/index2.html
+
+# NPM errors
+npm-debug.log
+
+# OSX
+.DS_Store
+
+# Vim stuff
+*.swp
+
+.DS_Store
+
+package.lock.json
+package-lock.json
