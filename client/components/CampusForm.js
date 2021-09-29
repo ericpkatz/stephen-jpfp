@@ -7,7 +7,7 @@ class CampusForm extends Component {
     super();
     this.state = {
       name: '',
-      address: '100 Mass Ave',
+      address: '',
       imageUrl: '',
       description: '',
       error: ''
@@ -16,6 +16,15 @@ class CampusForm extends Component {
     this.onChange = this.onChange.bind(this);
   }
   componentDidMount(){    
+    if(this.props.campus){
+      const { name, address, imageUrl, description } = this.props.campus;
+      this.setState({
+        name,
+        address,
+        imageUrl,
+        description
+      });
+    }
   }
   onChange(event){
     const name = event.target.name;
@@ -28,10 +37,12 @@ class CampusForm extends Component {
   async handleSubmit(event){
     event.preventDefault();    
     const campus = {...this.state }
+    delete campus.error;
     try {
       await this.props.save(campus);
     }
     catch(ex){
+      console.log(ex);
       this.setState({ error: ex.response.data } );
     }
   }
@@ -39,12 +50,13 @@ class CampusForm extends Component {
   render() {
     const { error, name, address, imageUrl, description } = this.state;
     const { handleSubmit, onChange } = this;
+    const { campus } = this.props;
 
     return(
       <div className="form container">
         <div id="formHeader">
           <h2>
-            <i className="fas fa-university"></i>&nbsp;Create Campus Form
+            <i className="fas fa-university"></i>&nbsp;{ campus ? 'Edit' : 'Create'} Campus Form
           </h2>
           { error }
         </div> 

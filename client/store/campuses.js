@@ -59,11 +59,10 @@ export const destroyCampus = (id, history)=> {
   };
 };
 
-export const updateCampus = (campus, history)=> {
+export const updateCampus = (campus)=> {
   return async (dispatch) => {
     const updated = (await axios.put(`/api/campuses/${campus.id}`, campus)).data;
     dispatch(_updateCampus(updated));
-    history.push('/');
   };
 };
 
