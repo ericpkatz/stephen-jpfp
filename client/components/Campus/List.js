@@ -1,8 +1,8 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import CampusForm from './CampusForm';
-import { createCampus } from '../store';
+import CampusForm from './Form';
+import { createCampus } from '../../store';
 
 const Campuses = ({ campuses, save }) => {
   return (

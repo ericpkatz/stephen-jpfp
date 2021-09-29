@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
-import CampusProfile from './CampusProfile';
+import CampusProfile from './Campus/Detail';
 import { updateStudent, createStudent } from '../store/students';
 
 class StudentForm extends Component {

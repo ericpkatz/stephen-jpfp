@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import CampusForm from './CampusForm';
-import { destroyCampus, updateStudent, updateCampus } from '../store/'
+import CampusForm from './Form';
+import { destroyCampus, updateStudent, updateCampus } from '../../store/'
 
 const CampusProfile = ({ enrolledStudents, campus, destroy, updateStudent, save })=> {
   const { name, imageUrl, address, description } = campus;
@@ -108,7 +108,7 @@ const CampusProfile = ({ enrolledStudents, campus, destroy, updateStudent, save 
 
 const mapStateToProps = ({ campuses, students }, { match })=> {
   const id = match.params.id * 1;
-  const campus = campuses.find( campus => campus.id === id); 
+  const campus = campuses.find( campus => campus.id === id) || {}; 
   const enrolledStudents = students.filter(student => student.campusId === id);
   return {
     campus,
