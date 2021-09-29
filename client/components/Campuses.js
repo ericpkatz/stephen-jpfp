@@ -2,13 +2,12 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import CampusForm from './CampusForm';
-import EditCampusForm from './EditCampusForm';
+import { createCampus } from '../store';
 
-const Campuses = ({ campuses }) => {
+const Campuses = ({ campuses, save }) => {
   return (
     <div>
-      {/* <CampusForm /> */}
-      <EditCampusForm />
+      <CampusForm save={ save }/>
       <div id="allCampuses" className="container">
         <h2><i className="fas fa-university i-tiny"></i><i className="fas fa-landmark"></i><i className="fas fa-university i-tiny"></i>&nbsp; All Campuses</h2>
           <div className="cardContainer">
@@ -45,8 +44,16 @@ const Campuses = ({ campuses }) => {
   );
 };
 
+const mapDispatchToProps = (dispatch, { history })=> {
+  return {
+    save: (campus)=> {
+      return dispatch(createCampus(campus, history));
+    }
+  }
+
+};
 const mapStateToProps = ({ campuses }) => ({
   campuses
 });
 
-export default connect(mapStateToProps)(Campuses);
+export default connect(mapStateToProps, mapDispatchToProps)(Campuses);

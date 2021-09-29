@@ -47,7 +47,7 @@ export const createCampus = (campus, history) => {
   return async (dispatch) => {
     const { data: created } = await axios.post('/api/campuses', campus);
     dispatch(_createCampus(created));
-    // history.push('/campuses');
+    history.push(`/campuses/${ created.id }`);
   };
 };
 
@@ -55,7 +55,7 @@ export const destroyCampus = (id, history)=> {
   return async(dispatch)=> {
     await axios.delete(`/api/campuses/${id}`);
     dispatch(_deleteCampus({ id: id * 1 }));
-    history.push('/');
+    history.push('/campuses');
   };
 };
 

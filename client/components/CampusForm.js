@@ -1,10 +1,5 @@
 import React, { Component } from 'react';
-import { createStudent } from '../store/students';
-import { createCampus } from '../store/campuses';
-import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { withRouter } from 'react-router';
-import CampusProfile from './CampusProfile';
 
 
 class CampusForm extends Component {
@@ -12,14 +7,16 @@ class CampusForm extends Component {
     super();
     this.state = {
       name: '',
-      address: '',
+      address: '100 Mass Ave',
       imageUrl: '',
-      description: ''   
+      description: '',
+      error: ''
     };
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
-
+  componentDidMount(){    
+  }
   onChange(event){
     const name = event.target.name;
     const value = event.target.value;
@@ -28,50 +25,47 @@ class CampusForm extends Component {
     this.setState(change);
   }
 
-  handleSubmit(event){
-    event.preventDefault();
-    this.props.createCampus({ ...this.state });
+  async handleSubmit(event){
+    event.preventDefault();    
+    const campus = {...this.state }
+    try {
+      await this.props.save(campus);
+    }
+    catch(ex){
+      this.setState({ error: ex.response.data } );
+    }
   }
 
   render() {
-    const { history, match } = this.props;
-    const { name, address, imageUrl, description } = this.state;
+    const { error, name, address, imageUrl, description } = this.state;
     const { handleSubmit, onChange } = this;
 
     return(
-      <div className="form">
-        <h2>Create Campus Form</h2>
-        <form id='campus-form' onSubmit={handleSubmit}>
-          
-          <label htmlFor='name'>Name:</label> &nbsp;
-          <input name='name' value={name} onChange={ onChange } />
+      <div className="form container">
+        <div id="formHeader">
+          <h2>
+            <i className="fas fa-university"></i>&nbsp;Create Campus Form
+          </h2>
+          { error }
+        </div> 
+        <form id='campus-edit-form' onSubmit={handleSubmit}>
+                    
+          <input placeholder="Name" name='name' value={name} onChange={ onChange } />
+          <br />          
+          <input placeholder="Address" name='address' value={address} onChange={ onChange } />
+          <br />        
+          <input placeholder="Image URL" name='imageUrl' value={imageUrl} onChange={ onChange } />
+          <br />          
+          <input placeholder="Description" name='description' value={description} onChange={ onChange } />
           <br />
-
-          <label htmlFor='address'>Address:</label> &nbsp;
-          <input name='address' value={address} onChange={ onChange } />
-          <br />
-
-          <label htmlFor='imageUrl'>Image URL:</label> &nbsp;
-          <input name='imageUrl' value={imageUrl} onChange={ onChange } />
-          <br />
-
-          <label htmlFor='description'>Description:</label> &nbsp;
-          <input name='description' value={description} onChange={ onChange } />
-          <br />
-
-          <button type='submit'>Submit</button>
-          <br />
-          <Link to='/'>Cancel</Link>
+          <div className="buttonContainer">
+            <button type='submit'>Submit</button>
+          </div>
+          <br />          
         </form>
       </div>
     );
   }
 }
 
-
-const mapDispatchToProps = (dispatch, { history }) => ({
-  createCampus: (student) => dispatch(createCampus(student, history))
-});
-
-
-export default withRouter(connect(null, mapDispatchToProps)(CampusForm))
+export default CampusForm; 
