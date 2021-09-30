@@ -47,7 +47,7 @@ const Campuses = ({ campuses, save }) => {
 const mapDispatchToProps = (dispatch, { history })=> {
   return {
     save: (campus)=> {
-      return dispatch(createCampus(campus, history));
+      dispatch(createCampus(campus, history));
     }
   }
 

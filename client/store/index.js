@@ -11,7 +11,6 @@ import filterReducer from './filter';
 export * from './students';
 export * from './campuses';
 export * from './filter';
-export * from './studentProfile';
 
 const rootReducer = combineReducers({
   students: studentsReducer,

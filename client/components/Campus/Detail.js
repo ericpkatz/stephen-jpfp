@@ -108,7 +108,7 @@ const CampusProfile = ({ enrolledStudents, campus, destroy, updateStudent, save 
 
 const mapStateToProps = ({ campuses, students }, { match })=> {
   const id = match.params.id * 1;
-  const campus = campuses.find( campus => campus.id === id) || {}; 
+  const campus = campuses.find( campus => campus.id === id); 
   const enrolledStudents = students.filter(student => student.campusId === id);
   return {
     campus,
