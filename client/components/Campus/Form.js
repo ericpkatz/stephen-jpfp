@@ -15,6 +15,17 @@ class CampusForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
     this.onChange = this.onChange.bind(this);
   }
+  componentDidUpdate(prevProps){
+    if(this.props.campus && prevProps.campus.updatedAt !== this.props.campus.updatedAt){
+      const { name, address, imageUrl, description } = this.props.campus;
+      this.setState({
+        name,
+        address,
+        imageUrl,
+        description
+      });
+    }
+  }
   componentDidMount(){    
     if(this.props.campus){
       const { name, address, imageUrl, description } = this.props.campus;

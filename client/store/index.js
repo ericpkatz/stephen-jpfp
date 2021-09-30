@@ -20,5 +20,6 @@ const rootReducer = combineReducers({
 
 export default createStore(
   rootReducer,
-  applyMiddleware(thunk, loggingMiddleware)
+  applyMiddleware(thunk, //loggingMiddleware
+  )
 )

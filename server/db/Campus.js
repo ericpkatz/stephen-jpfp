@@ -6,6 +6,9 @@ const Campus = db.define('campus', {
   name: {
     type: STRING,
     allowNull: false,
+    set: function(value){
+      this.setDataValue('name', value.toUpperCase());
+    },
     validate: {
       notEmpty: true
     }
@@ -18,6 +21,9 @@ const Campus = db.define('campus', {
   address: {
     type: STRING,
     allowNull: false,
+    set: function(value){
+      this.setDataValue('address', `${value}!`);
+    },
     validate: {
       notEmpty: true
     }
