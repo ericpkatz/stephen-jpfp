@@ -5,17 +5,14 @@ import thunk from 'redux-thunk';
 // Imported Reducers
 import studentsReducer from './students';
 import campusesReducer from './campuses';
-import filterReducer from './filter';
 
 
 export * from './students';
 export * from './campuses';
-export * from './filter';
 
 const rootReducer = combineReducers({
   students: studentsReducer,
-  campuses: campusesReducer,
-  filterView: filterReducer
+  campuses: campusesReducer
 });
 
 export default createStore(

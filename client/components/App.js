@@ -62,8 +62,8 @@ export class App extends Component {
             <Switch>              
               <Route path='/' exact component={ Home } />
               <Route exact path='/students' component={Students} />
-              <Route path='/students/:id' component={StudentProfile} />
-              <Route path='/students&filter=:filterId' component={Students} />
+              <Route exact path='/students/:id' component={StudentProfile} />
+              <Route path='/students/filter/:filter' component={Students} />
               <Route exact path='/form' component={StudentForm} />
               <Route exact path='/campuses' component={Campuses} />
               <Route path='/campuses/:id' component={CampusProfile} />
